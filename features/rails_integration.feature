@@ -10,7 +10,7 @@ Feature: integrate with Rails
       | factory_girl          | ~> 2.6.4  |         |
       | cucumber-rails        | ~> 1.3.0  | false   |
       | rspec-rails           | ~> 2.11.0 |         |
-      | capybara              | ~> 1.1.2  |         |
+      | capybara              | ~> 2.0.1  |         |
       | slim-rails            | ~> 1.0.3  |         |
     And  I successfully run `bundle install --local`
     And  I successfully run `bundle exec rake db:migrate`
