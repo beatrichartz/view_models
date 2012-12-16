@@ -193,7 +193,6 @@ end
 
 h2. Further reads
 
-"Mailing List":http://groups.google.com/group/view_models/topics
 "Rubygems":http://rubygems.org/gems/view_models
 "Bug Tracker":http://github.com/floere/view_models/issues
 "Source [Github]":http://github.com/floere/view_models
