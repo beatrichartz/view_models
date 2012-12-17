@@ -33,7 +33,7 @@ describe ViewModels::View do
     end
     context "with ActionView Errors" do
       it "should return nil" do
-        lookup_context.should_receive(:find_template).with('PATH').once.and_raise(ActionView::MissingTemplate)
+        lookup_context.should_receive(:find_template).with('PATH').once.and_raise(StandardError)
         subject.find_template('PATH').should be_nil
       end
     end

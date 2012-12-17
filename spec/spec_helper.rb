@@ -5,7 +5,7 @@ TESTAPP_ROOT = File.join(File.dirname(__FILE__), '..', 'tmp', 'aruba', 'testapp'
 FileUtils.rm_rf(TESTAPP_ROOT) if File.exists?(TESTAPP_ROOT)
 `rails new #{TESTAPP_ROOT}`
 
-ENV['RAILS_ENV'] = 'test'
+ENV['RAILS_ENV']        = 'test'
 ENV['BUNDLE_GEMFILE'] ||= TESTAPP_ROOT + '/Gemfile'
 
 require "#{TESTAPP_ROOT}/config/environment"

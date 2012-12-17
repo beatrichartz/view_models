@@ -16,20 +16,24 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency 'actionpack', '>= 3.0.0'
-  s.add_dependency 'actionmailer', '>= 3.0.0'
+  s.add_dependency 'actionpack',    '~> 3'
 
+  s.add_development_dependency 'rails',               '~> 3'
+  s.add_development_dependency 'jquery-rails'
+  s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'rake',                '>= 0.8.7'
   s.add_development_dependency 'aruba'
   s.add_development_dependency 'yard'
   s.add_development_dependency 'RedCloth'
   s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'appraisal',           '~> 0.4.0'
-  s.add_development_dependency 'bundler',             '>= 1.1.0'
-  s.add_development_dependency 'cucumber-rails'
-  s.add_development_dependency 'cucumber'
-  s.add_development_dependency 'factory_girl_rails',  '~> 1.7.0'
-  s.add_development_dependency 'factory_girl',        '~> 2.6.4'
-  s.add_development_dependency 'slim-rails',          '~> 1.0.0'
-  s.add_development_dependency 'rspec-rails',         '~> 2.11.0'
+  s.add_development_dependency 'appraisal',           '~> 0.4'
+  s.add_development_dependency 'bundler',             '>= 1.0'
+  s.add_development_dependency 'cucumber-rails'#,      '~> 1.3' #bundler is not friends with some cucumber versions
+  #s.add_development_dependency 'cucumber'#,            '= 1.2.1'
+  s.add_development_dependency 'capybara',            '~> 1'
+  s.add_development_dependency 'factory_girl_rails',  '~> 1'
+  s.add_development_dependency 'factory_girl',        '~> 2'
+  s.add_development_dependency 'slim-rails',          '~> 1.0'
+  s.add_development_dependency 'rspec',               '~> 2'
+  s.add_development_dependency 'rspec-rails',         '~> 2'
 end
