@@ -23,7 +23,7 @@ When 'I generate a new rails application' do
     And I comment out the gem "uglifier" from the Gemfile
     And I reset Bundler environment variables
     And I set the "BUNDLE_GEMFILE" environment variable to "Gemfile"
-    And I successfully run `bundle install --local`
+    And I successfully run `bundle install`
   }
   if RUBY_VERSION >= "1.9.3"
     append_to_gemfile %(gem "rake", "~> 0.9.3.beta.1")

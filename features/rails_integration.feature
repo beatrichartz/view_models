@@ -12,7 +12,7 @@ Feature: integrate with Rails
       | rspec-rails           | ~> 2.11.0 |         |
       | capybara              | ~> 1.1.3  |         |
       | slim-rails            | ~> 1.0.3  |         |
-    And  I successfully run `bundle install --local`
+    And  I successfully run `bundle install`
     And  I successfully run `bundle exec rake db:migrate`
     
   Scenario:
