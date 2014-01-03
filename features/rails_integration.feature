@@ -6,12 +6,12 @@ Feature: integrate with Rails
     And  I configure the application to use the view_models gem from this project
     And  I configure the application to use the following gems
       | Name                  | Version   | Require |
-      | factory_girl_rails    | ~> 1.7.0  |         |
-      | factory_girl          | ~> 2.6.4  |         |
-      | cucumber-rails        | ~> 1.3.0  | false   |
-      | rspec-rails           | ~> 2.11.0 |         |
-      | capybara              | ~> 1.1.3  |         |
-      | slim-rails            | ~> 1.0.3  |         |
+      | factory_girl_rails    | ~> 4.3.0  |         |
+      | factory_girl          | ~> 4.3.0  |         |
+      | cucumber-rails        | ~> 1.4.0  | false   |
+      | rspec-rails           | ~> 2.14.1 |         |
+      | capybara              | ~> 2.2.0  |         |
+      | slim-rails            | ~> 2.0.4  |         |
     And  I successfully run `bundle install`
     And  I successfully run `bundle exec rake db:migrate`
     
