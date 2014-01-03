@@ -11,14 +11,13 @@ Gem::Specification.new do |s|
   s.summary     = "The missing R to the Rails MVC"
   s.description = "The missing R to the Rails MVC"
 
-  s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency 'actionpack',    '~> 3'
+  s.add_dependency 'actionpack',    '~> 4'
 
-  s.add_development_dependency 'rails',               '~> 3'
+  s.add_development_dependency 'rails',               '~> 4'
   s.add_development_dependency 'jquery-rails'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'rake',                '>= 0.8.7'

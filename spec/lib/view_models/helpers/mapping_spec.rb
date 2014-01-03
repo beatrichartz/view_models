@@ -7,7 +7,7 @@ describe ViewModels::Helpers::Mapping do
     it "should just pass the params through to the view_model" do
       class SomeModelClazz; end
       class ViewModels::SomeModelClazz < ViewModels::Base; end
-      context = stub :context
+      context = double :context
       model = SomeModelClazz.new
       
       ViewModels::SomeModelClazz.should_receive(:new).once.with model, context
@@ -42,13 +42,13 @@ describe ViewModels::Helpers::Mapping do
       class SomeModelClazz; end
       class ViewModels::SomeSpecificClazz < ViewModels::Base; end
       before(:each) do
-        self.should_receive(:specific_view_model_mapping).any_number_of_times.and_return SomeModelClazz => ViewModels::SomeSpecificClazz
+        self.should_receive(:specific_view_model_mapping).at_most(2).times.and_return SomeModelClazz => ViewModels::SomeSpecificClazz
       end
       it "should return a specifically mapped view_model instance" do
         view_model_for(SomeModelClazz.new).should be_instance_of ViewModels::SomeSpecificClazz
       end
       it "should not call #default_view_model_class_for" do
-        mock(self).should_receive(:default_view_model_class_for).never
+        double(self).should_receive(:default_view_model_class_for).never
         view_model_for SomeModelClazz.new
       end
     end

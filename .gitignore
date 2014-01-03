@@ -4,5 +4,6 @@ tmp
 coverage
 pkg
 .rbx
+.gem
 
 rails/log/*.log

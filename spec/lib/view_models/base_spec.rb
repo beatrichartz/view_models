@@ -5,7 +5,7 @@ describe ViewModels::Base do
   describe "readers" do
     describe "model" do
       before(:each) do
-        @model      = stub :model
+        @model      = double :model
         @view_model = ViewModels::Base.new @model, nil
       end
       it "should have a reader" do
@@ -16,7 +16,7 @@ describe ViewModels::Base do
     end
     describe "controller" do
       before(:each) do
-        @context    = stub :controller
+        @context    = double :controller
         @view_model = ViewModels::Base.new nil, @context
       end
       it "should have a reader" do
@@ -30,7 +30,7 @@ describe ViewModels::Base do
   describe "context recognition" do
     describe "context is a view" do
       before(:each) do
-        @view = stub :view, :controller => 'controller'
+        @view = double :view, :controller => 'controller'
         @view_model = ViewModels::Base.new nil, @view
       end
       it "should get the controller from the view" do
@@ -41,7 +41,7 @@ describe ViewModels::Base do
     end
     describe "context is a controller" do
       before(:each) do
-        @controller = stub :controller
+        @controller = double :controller
         @view_model = ViewModels::Base.new nil, @controller
       end
       it "should just use it for the controller" do
@@ -55,7 +55,7 @@ describe ViewModels::Base do
   
   describe "to_param" do
     before(:each) do
-      @model      = stub :model
+      @model      = double :model
       @view_model = ViewModels::Base.new @model, nil
     end
     it "should delegate to_param to the model" do
@@ -77,8 +77,8 @@ describe ViewModels::Base do
     end
     
     it "should delegate dom_id with args to the context" do
-      @context = mock('context')
-      @view_model.stub! :context => @context
+      @context = double('context')
+      @view_model.stub :context => @context
       @context.should_receive(:dom_id).with('arg1', 'arg2').once
       
       @view_model.dom_id('arg1', 'arg2')
@@ -128,7 +128,7 @@ describe ViewModels::Base do
   
   describe "#logger" do
     it "should delegate to the controller" do
-      controller = stub :controller
+      controller = double :controller
       view_model = ViewModels::Base.new nil, controller
       
       controller.should_receive(:logger).once

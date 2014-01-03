@@ -4,8 +4,8 @@ describe ViewModels::Helpers::Mapping::Collection do
   include ViewModels::Helpers::Mapping
   
   before(:each) do
-    @collection = stub :collection
-    @context    = stub :context
+    @collection = double :collection
+    @context    = double :context
     @collection_view_model = ViewModels::Helpers::Mapping::Collection.new @collection, @context
   end
   
@@ -32,8 +32,8 @@ describe ViewModels::Helpers::Mapping::Collection do
       collection_view_model_for([]).should be_kind_of ViewModels::Helpers::Mapping::Collection
     end
     it "should pass any parameters directly through" do
-      collection = stub :collection
-      context = stub :context
+      collection = double :collection
+      context = double :context
       ViewModels::Helpers::Mapping::Collection.should_receive(:new).with(collection, context).once
       collection_view_model_for collection, context
     end
@@ -41,7 +41,7 @@ describe ViewModels::Helpers::Mapping::Collection do
   
   describe "list" do
     it "should call render_partial and return the rendered result" do
-      @collection_view_model.stub! :render_partial => :result
+      @collection_view_model.stub :render_partial => :result
       
       @collection_view_model.list.should == :result
     end
@@ -71,7 +71,7 @@ describe ViewModels::Helpers::Mapping::Collection do
   
   describe "collection" do
     it "should call render_partial and return the rendered result" do
-      @collection_view_model.stub! :render_partial => :result
+      @collection_view_model.stub :render_partial => :result
       
       @collection_view_model.collection.should == :result
     end
@@ -100,7 +100,7 @@ describe ViewModels::Helpers::Mapping::Collection do
   
   describe "table" do
     it "should call render_partial and return the rendered result" do
-      @collection_view_model.stub! :render_partial => :result
+      @collection_view_model.stub :render_partial => :result
       
       @collection_view_model.table.should == :result
     end
@@ -130,7 +130,7 @@ describe ViewModels::Helpers::Mapping::Collection do
   
   describe "pagination" do
     it "should call render_partial and return the rendered result" do
-      @collection_view_model.stub! :render_partial => :result
+      @collection_view_model.stub :render_partial => :result
       
       @collection_view_model.pagination.should == :result
     end
@@ -198,7 +198,7 @@ describe ViewModels::Helpers::Mapping::Collection do
       end
       describe "each" do
         it "should delegate to #each of the collection" do
-          proc = stub :proc
+          proc = double :proc
           
           @collection.should_receive(:each).with(proc).once
           

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe ViewModels::View do
   subject do
-    controller_class = stub :controller_class, :view_paths => ActionView::PathSet.new
-    controller       = stub :controller, :class => controller_class, :_prefixes => nil
+    controller_class = double :controller_class, :view_paths => ActionView::PathSet.new
+    controller       = double :controller, :class => controller_class, :_prefixes => nil
 
     ViewModels::View.new controller, Module.new
   end
@@ -13,17 +13,17 @@ describe ViewModels::View do
   end
   
   it "should be renderable" do
-    options = mock('options', :to_render_options => {:hey => 'hey!'})
+    options = double('options', :to_render_options => {:hey => 'hey!'})
     subject.should_receive(:render).with(:hey => 'hey!').once
     subject.render_with(options)
   end
   
   describe "finding templates" do
-    let(:lookup_context) { mock('lookup_context') }
-    let(:template) { mock('template') }
+    let(:lookup_context) { double('lookup_context') }
+    let(:template) { double('template') }
 
     before(:each) do
-      subject.stub! :lookup_context => lookup_context
+      subject.stub :lookup_context => lookup_context
     end
     context "without ActionView Errors" do
       it "should find the template via lookup context" do
