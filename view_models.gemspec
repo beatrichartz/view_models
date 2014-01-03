@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'appraisal',           '~> 0.4'
   s.add_development_dependency 'bundler',             '>= 1.0'
   s.add_development_dependency 'cucumber-rails'#,      '~> 1.3' #bundler is not friends with some cucumber versions
-  #s.add_development_dependency 'cucumber'#,            '= 1.2.1'
   s.add_development_dependency 'capybara',            '~> 1'
   s.add_development_dependency 'factory_girl_rails',  '~> 1'
   s.add_development_dependency 'factory_girl',        '~> 2'
