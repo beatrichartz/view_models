@@ -81,7 +81,7 @@ module ViewModels
       #
       include Extensions::ModelReader
       
-      unless instance_methods.include?('old_add_template_helper')
+      unless instance_methods.include? 'old_add_template_helper'
         alias old_add_template_helper add_template_helper
         
         # Wrapper for add_template_helper in ActionController::Helpers, also
