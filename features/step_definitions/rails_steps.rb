@@ -56,9 +56,9 @@ end
 When 'I configure the application to use the following gems' do |table|
   table.hashes.each do |hash|
     if hash[:Require] && hash[:Require].strip.size > 0
-      append_to_gemfile "gem '#{hash[:Name]}', '#{hash[:Version]}', :require => #{hash[:Require]}\n"
+      append_to_gemfile "gem '#{hash[:Name]}', '#{hash[:Version]}', :require => #{hash[:Require]}#{hash[:Condition]}\n"
     else
-      append_to_gemfile "gem '#{hash[:Name]}', '#{hash[:Version]}'\n"
+      append_to_gemfile "gem '#{hash[:Name]}', '#{hash[:Version]}'#{hash[:Condition]}\n"
     end
   end
   
