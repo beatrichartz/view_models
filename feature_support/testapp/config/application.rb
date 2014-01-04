@@ -59,6 +59,7 @@ module Testapp
     # Version of your assets, change this if you want to expire all your assets
     # config.assets.version = '1.0'
     
+    # Add the app folder to autoload paths
     config.autoload_paths.unshift config.root.join('app')
   end
 end

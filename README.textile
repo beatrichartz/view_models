@@ -1,12 +1,12 @@
 h1. View Models !https://secure.travis-ci.org/beatrichartz/view_models.png(Build Status)!:http://travis-ci.org/beatrichartz/view_models "!https://codeclimate.com/badge.png!":https://codeclimate.com/github/beatrichartz/view_models
 
-A representer solution for Rails 3 inspired by Florian Hankes View Models for Rails 2 (http://florianhanke.com/view_models). For older versions of Rails please use versions up to 3. You may find view models useful (or not). Fact: They will keep code out of your views. Because view models do not like code in your view.
+A representer solution for Rails 3 and 4 inspired by Florian Hankes View Models for Rails 2 (http://florianhanke.com/view_models). For older versions of Rails please use versions up to 3. You may find view models useful (or not). Fact: They will keep code out of your views. Because view models do not like code in your view.
 
 h2. Installing View Models
 
 Add this to your gemfile
 
-<pre><code>gem "view_models",   ">= 3.0.0"
+<pre><code>gem "view_models",   "~> 4.0"
 </code></pre>
 
 And this to your application.rb: (It adds the app folder to the autoload paths, which is necessary for the view models to load)
@@ -21,7 +21,6 @@ h2. TODOs
 
 What you can look forward to in future versions of this gem:
 - Bootstrapping for easier installation
-- JSON generation out of view models
 
 h2. Basic Usage
 
