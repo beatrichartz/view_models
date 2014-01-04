@@ -9,4 +9,5 @@ gemfiles/*.Gemfile
 Gemfile.lock
 .bundle/
 /gemfiles/*
+*.gem
 rails/log/*.log
