@@ -6,8 +6,7 @@ Gem::Specification.new do |s|
   s.version       = ViewModels::VERSION.dup
   s.authors       = ["Florian Hanke", "Kaspar Schiess", "Niko Dittmann", "Beat Richartz"]
   s.date          = Time.now.strftime("%Y-%m-%d")
-  s.email         = "support@viewmodels.com"
-  s.homepage      = "http://florianhanke.com/view_models/"
+  s.email         = "beat.richartz@gmail.com"
   s.summary       = "The missing R to the Rails MVC"
   s.description   = "The missing R to the Rails MVC"
   s.extensions    = 'ext/mkrf_conf.rb'
