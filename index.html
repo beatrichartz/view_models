@@ -1,69 +1,199 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+<!doctype html>
+<html>
   <head>
-    <meta content='text/html; charset=utf-8' http-equiv='Content-type' />
-    <link href='../basic.css' rel='stylesheet' type='text/css' />
-    <title>Florian Hanke's View Models on Github</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>View models by beatrichartz</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-    <ol class='nav'>
-      <li>
-        <a href='http://floere.github.com/'>home</a>
-        •
-      </li>
-      <li>
-        <a href='http://floere.github.com/view_models'>view models</a>
-      </li>
-    </ol>
-    <h1>View Models</h1>
-    <div>
-      <img src='view_models.png' />
-      <h2>Silly Tagline</h2>
-      <p>The missing glue between the letters in ruby on rails' MVC.</p>
-      <div class='clear'></div>
-      <h2>Serious Tagline</h2>
-      <p>The missing glue between the layers in ruby on rails' MVC.</p>
+    <div class="wrapper">
+      <header>
+        <h1>View models</h1>
+        <p>Rails Presenters with a little bit of decoration - add an R to your MVC</p>
+
+        <p class="view"><a href="https://github.com/beatrichartz/view_models">View the Project on GitHub <small>beatrichartz/view_models</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/beatrichartz/view_models/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/beatrichartz/view_models/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/beatrichartz/view_models">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="view-models--" class="anchor" href="#view-models--"><span class="octicon octicon-link"></span></a>View Models <a href="http://travis-ci.org/beatrichartz/view_models"><img src="https://secure.travis-ci.org/beatrichartz/view_models.png" alt="Build Status"></a> <a href="https://codeclimate.com/github/beatrichartz/view_models"><img src="https://codeclimate.com/github/beatrichartz/view_models.png" alt="CodeClimate"></a>
+</h1>
+
+<p>A representer solution for Rails 3 and 4 inspired by Florian Hankes View Models for Rails 2 (<a href="http://florianhanke.com/view_models">http://florianhanke.com/view_models</a>). For older versions of Rails please use versions up to 3. You may find view models useful (or not). Fact: They will keep code out of your views. Because view models do not like code in your view.</p>
+
+<h2>
+<a name="installing-view-models" class="anchor" href="#installing-view-models"><span class="octicon octicon-link"></span></a>Installing View Models</h2>
+
+<p>Add this to your gemfile</p>
+
+<pre><code>gem "view_models",   "~&gt; 4.0"
+</code></pre>
+
+<p>And this to your application.rb: (It adds the app folder to the autoload paths, which is necessary for the view models to load)</p>
+
+<pre><code>config.autoload_paths += %W(#{config.root}/app)
+</code></pre>
+
+<p>Create a directory "view_models" in your app folder, and you're good to go.</p>
+
+<pre><code>mkdir ./app/view_models
+</code></pre>
+
+<h2>
+<a name="todos" class="anchor" href="#todos"><span class="octicon octicon-link"></span></a>TODOs</h2>
+
+<p>What you can look forward to in future versions of this gem:</p>
+
+<ul>
+<li>Bootstrapping for easier installation</li>
+</ul><h2>
+<a name="basic-usage" class="anchor" href="#basic-usage"><span class="octicon octicon-link"></span></a>Basic Usage</h2>
+
+<p>Let's say you have a model User (with a first and a last name and an address in the database):</p>
+
+<pre><code>class User </code></pre>
+
+<p>Write a corresponding view model user.rb in your view_models folder</p>
+
+<pre><code>class ViewModels::User </code></pre>
+
+<p>In your view, call the view_model for a model by using «view_model_for»</p>
+
+<pre><code>- view_model = view_model_for(@user)
+%h2= view_model.name
+%h2= view_model.creation_time
+</code></pre>
+
+<p>All beautiful, you may think, but...</p>
+
+<h2>
+<a name="why-view-models-aka-the-problem" class="anchor" href="#why-view-models-aka-the-problem"><span class="octicon octicon-link"></span></a>Why View Models? (aka «The Problem»)</h2>
+
+<p>Ever felt like putting something like this in your views (example in haml)?</p>
+
+<pre><code>#user
+  .name= [@user.first_name, @user.last_name].join ' '
+  .address= [@user.street, @user.street_number, @user.zip_code, @user.city].join ' '
+</code></pre>
+
+<p>Well, that may feel good if you're in a hurry. Soon there comes the time when you use this code in more than one place. Time to build a helper:</p>
+
+<pre><code>module UserHelper
+  def user_name user
+    [user.first_name, user.last_name].join ' '
+  end
+
+  def user_address user
+    [user.street, user.street_number, user.zip_code, user.city].join ' '
+  end
+end
+
+#user
+  .name= user_name @user
+  .address= user_address @user
+</code></pre>
+
+<p>It may be a lot cleaner, but something just does not feel right. Right, but what? Well, for instance, you have to namespace all your methods with «user» so your methods don't get messy. Second, you have to include the helper either in every context you use it, or even in the whole app. If only you had a polymorphic object to represent your models in the views...</p>
+
+<h3>
+<a name="meet-view-models-aka-the-solution" class="anchor" href="#meet-view-models-aka-the-solution"><span class="octicon octicon-link"></span></a>Meet View Models (aka «The Solution»)</h3>
+
+<p>View models are pretty, because they represent your models in your views. They look good in every context, and therefore make you look good, too. Take our example from before:</p>
+
+<pre><code>class ViewModels::User </code></pre>
+
+<p>And your view will look like this:</p>
+
+<pre><code>- user_view_model = view_model_for(@user)
+#user
+  .name= user_view_model.name
+  .address= user_view_model.address
+</code></pre>
+
+<p>No helper inclusion needed, no further noise involved. In fact, you can make it even prettier: What if you needed that partial with the user name and address somewhere else in your code?</p>
+
+<h3>
+<a name="meet-view-models-render_as-method" class="anchor" href="#meet-view-models-render_as-method"><span class="octicon octicon-link"></span></a>Meet View Models render_as Method</h3>
+
+<p>View models feature template rendering: You can render any partial in your views, following your views directory tree structure: A view_model variable will automatically be included as a local variable in your partial if you render it with view models:</p>
+
+<p>Let's say you have the user model from before, and the following partial written for the view model to render named "info":</p>
+
+<pre><code>#user
+  .name= view_model.name
+  .address= view_model.address
+</code></pre>
+
+<p>Now everything you have to do to render that partial is:</p>
+
+<pre><code>= view_model_for(@user).render_as :info
+</code></pre>
+
+<p>View models feature hierarchical template rendering. That means, if you have a parent view model which has an identical partial already installed, you do not need to copy identical code just to render the same template. The view model will lookup its inheritance chain and Rails template paths to find the suitable partial. Which brings us to another great feature:</p>
+
+<h3>
+<a name="view-models-can-haz-inheritance" class="anchor" href="#view-models-can-haz-inheritance"><span class="octicon octicon-link"></span></a>View Models Can Haz Inheritance</h3>
+
+<p>Ever tried to do inheritance in Rails helpers? Right. View Models, on the other side, love inheritance. They do not need arguments to display a formatted creation time for all your models. Consider the following:</p>
+
+<h4>
+<a name="the-view-model-way" class="anchor" href="#the-view-model-way"><span class="octicon octicon-link"></span></a>The View Model Way</h4>
+
+<p>You can generate a view model tree structure with a view model for your whole app for your other view models to inherit from. The polymorphic class matching of the view models ignores the missing class YourApp candidly.</p>
+
+<pre><code>class ViewModels::YourApp </code></pre>
+
+<p>In your view:</p>
+
+<pre><code>= view_model_for(@user).creation_time
+</code></pre>
+
+<h4>
+<a name="the-helper-way" class="anchor" href="#the-helper-way"><span class="octicon octicon-link"></span></a>The Helper Way</h4>
+
+<p>Imagine how to do this in a helper ? Well, better go ahead and use time_ago_in_words everywhere.</p>
+
+<h2>
+<a name="testing-view-models" class="anchor" href="#testing-view-models"><span class="octicon octicon-link"></span></a>Testing View Models</h2>
+
+<p>Testing View Models is easy. You can use the view models initializer instead of the view_model_for mapping (example in rspec with factory girl):</p>
+
+<pre><code>describe "ViewModels::User" do
+  let(:user) { build_stubbed(:user) }
+  subject { ViewModels::User.new(user, @controller) } # @controller may be nil or the controller
+  
+  describe "model_readers"
+    .. there you go
+  end
+end
+</code></pre>
+
+<h2>
+<a name="further-reads" class="anchor" href="#further-reads"><span class="octicon octicon-link"></span></a>Further Reads</h2>
+
+<p><a href="http://rubygems.org/gems/view_models">RubyGems</a>
+<a href="http://github.com/beatrichartz/view_models/issues">Bug Tracker</a>
+<a href="http://github.com/beatrichartz/view_models">Source</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/beatrichartz">beatrichartz</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <h2>But why? Let me tell you a story of high adventure</h2>
-    <p>During writing a music community platform with multiple different profile types – in our case bands, normal members, venues, and labels – it occurred to us that type specific methods used in views were hard to place.</p>
-    <p>As a simple example: A method that generates a name that is displayed on top of the page, like "Rudy's Randy Rockers", or a similarly realistic band name.</p>
-    <h2>The problem</h2>
-    <p>For bands that needed to be just the band name, for members the name and surname, for labels the name along with the amount of bands under contract. Requirements that are easily fulfilled, for an engineer with a few tricks up his sleeves. Or so it seemed.</p>
-    <h2>A long and arduous journey</h2>
-    <p>
-      First, we tried putting it into models, but that
-      <em>
-        violated the
-        <a href='http://en.wikipedia.org/wiki/Model–view–controller'>MVC principle</a>
-      </em>
-      and we didn't feel to good about sticking view code into the model. Besides, all view helpers are pretty inaccessible in the model. And for a good reason too!
-    </p>
-    <p>
-      Even after sticking the code into a helper, thus into the view, this didn't feel much better either, as we had to check for the type of the model. That resulted in a case of case statements which we do not speak about too much nowadays. Even bringing it up here caused me to cringe.
-      <em>Masochism? Yes. Polymorphism? Sadly, no.</em>
-    </p>
-    <p>
-      P.S: Rule number one. We do not speak about case statement club.
-      <em>Ever.</em>
-    </p>
-    <h2>The big question</h2>
-    <p>So, where to put this view specific, model-type dependent code?</p>
-    <h2>The solution</h2>
-    <p>Enter view models, the public face of the normally shy models.</p>
-    <h2>Bag o' bits</h2>
-    <ul>
-      <li>
-        <a href='http://github.com/floere/view_models'>Git Repo</a>
-      </li>
-      <li>
-        <a href='http://runcoderun.com/floere/view_models/'>Continuous Integration</a>
-      </li>
-      <li>
-        <a href='http://getcaliper.com/caliper/project?repo=git://github.com/floere/view_models.git'>Metrics</a>
-      </li>
-      <li>
-        <a href='http://rdoc.info/projects/floere/view_models'>RDoc</a>
-      </li>
-    </ul>
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
