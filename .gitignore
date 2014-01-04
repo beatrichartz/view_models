@@ -7,5 +7,6 @@ pkg
 .gem
 gemfiles/*.Gemfile
 Gemfile.lock
+.bundle/
 
 rails/log/*.log
