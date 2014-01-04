@@ -1,0 +1,13 @@
+.DS_Store
+log/*.log
+tmp
+coverage
+pkg
+.rbx
+.gem
+gemfiles/*.Gemfile
+Gemfile.lock
+.bundle/
+/gemfiles/*
+*.gem
+rails/log/*.log
