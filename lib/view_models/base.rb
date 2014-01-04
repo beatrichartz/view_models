@@ -11,7 +11,7 @@ module ViewModels
   # Gets raised when render_as, render_the, or render_template cannot
   # find the named template, not even in the hierarchy.
   #
-  MissingTemplateError = Class.new(StandardError)
+  MissingTemplateError = Class.new StandardError
   
   # Base class from which all view_models inherit.
   # @example Create Your first View Model
@@ -154,7 +154,7 @@ module ViewModels
         # @param [ActionView] renderer The view renderer
         # @param [Hash] options The options to pass to the template path
         #
-        def template_path renderer, options          
+        def template_path renderer, options
           raise_template_error_with options.error_message if inheritance_chain_ends?
           
           template_path_from(renderer, options) || self.next_in_render_hierarchy.template_path(renderer, options)
