@@ -169,13 +169,6 @@ h4. The Helper Way
 
 Imagine how to do this in a helper ? Well, better go ahead and use time_ago_in_words everywhere.
 
-h2. Where is it used?
-
-There are known some places in the big place called internet to use this gem:
-
-"rightclearing.com [Music Licensing Provider]": http://rightclearing.com
-"restorm.com [Music Platform]": http://restorm.com
-
 h2. Testing View Models
 
 Testing View Models is easy. You can use the view models initializer instead of the view_model_for mapping (example in rspec with factory girl):
@@ -193,5 +186,5 @@ end
 h2. Further reads
 
 "Rubygems":http://rubygems.org/gems/view_models
-"Bug Tracker":http://github.com/floere/view_models/issues
-"Source [Github]":http://github.com/floere/view_models
+"Bug Tracker":http://github.com/beatrichartz/view_models/issues
+"Source [Github]":http://github.com/beatrichartz/view_models
