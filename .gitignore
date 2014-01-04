@@ -8,5 +8,5 @@ pkg
 gemfiles/*.Gemfile
 Gemfile.lock
 .bundle/
-
+/gemfiles/*
 rails/log/*.log
