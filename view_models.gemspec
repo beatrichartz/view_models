@@ -10,10 +10,12 @@ Gem::Specification.new do |s|
   s.summary       = "The missing R to the Rails MVC"
   s.description   = "The missing R to the Rails MVC"
   s.extensions    = 'ext/mkrf_conf.rb'
+  s.homepage      = 'https://github.com/beatrichartz/view_models'
 
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+  s.licenses      = ['MIT']
 
   s.add_dependency             'actionpack',          '>= 3.1'
 
