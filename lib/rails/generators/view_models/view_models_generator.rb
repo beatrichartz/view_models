@@ -18,15 +18,14 @@ class ViewModelsGenerator < Rails::Generators::Base
   # Create views corresponding to view models
   #
   def create_views file_name
-    %W(list_item main_item).each do |view|
-      create_file "app/views/#{file_name.pluralize}/_#{view}.html.#{options.views.downcase}", File.read(File.join(File.expand_path('../templates', __FILE__), "/views/_empty.html.#{options.views.downcase}"))
+    %W(list_item main_item collection list pagination table).each do |view|
+      create_view_file view, file_name
     end
+  end
   
-    # Copy collection views.
-    #
-    %W(collection list pagination table).each do |view|
-      create_file "app/views/#{file_name.pluralize}/_#{view}.html.#{options.views.downcase}", File.read(File.join(File.expand_path('../templates', __FILE__), "/views/_#{view}.html.#{options.views.downcase}"))
-    end
+  def create_view_file view, file_name
+    create_file "app/views/#{file_name.pluralize}/_#{view}.html.#{options.views.downcase}", File.read(File.join(File.expand_path('../templates', __FILE__), "/views/_empty.html.#{options.views.downcase}"))
+    
   end
   
   # Create the view model files for the view models given
