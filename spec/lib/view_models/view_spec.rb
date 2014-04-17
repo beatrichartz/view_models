@@ -9,12 +9,12 @@ describe ViewModels::View do
   end
   
   it "should be initializable" do
-    lambda { subject }.should_not raise_error
+    expect { subject }.not_to raise_error
   end
   
   it "should be renderable" do
     options = double('options', :to_render_options => {:hey => 'hey!'})
-    subject.should_receive(:render).with(:hey => 'hey!').once
+    expect(subject).to receive(:render).with(:hey => 'hey!').once
     subject.render_with(options)
   end
   
@@ -27,14 +27,14 @@ describe ViewModels::View do
     end
     context "without ActionView Errors" do
       it "should find the template via lookup context" do
-        lookup_context.should_receive(:find_template).with('PATH').once.and_return(template)
-        subject.find_template('PATH').should == template
+        expect(lookup_context).to receive(:find_template).with('PATH').once.and_return(template)
+        expect(subject.find_template('PATH')).to eq(template)
       end
     end
     context "with ActionView Errors" do
       it "should return nil" do
-        lookup_context.should_receive(:find_template).with('PATH').once.and_raise(StandardError)
-        subject.find_template('PATH').should be_nil
+        expect(lookup_context).to receive(:find_template).with('PATH').once.and_raise(StandardError)
+        expect(subject.find_template('PATH')).to be_nil
       end
     end
   end

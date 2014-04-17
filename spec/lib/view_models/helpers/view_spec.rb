@@ -10,8 +10,8 @@ describe ViewModels::Helpers::View do
         include ViewModels::Helpers::View
       end
       
-      TestClass.should include(ActionView::Helpers)
-      TestClass.should include(ERB::Util)
+      expect(TestClass).to include(ActionView::Helpers)
+      expect(TestClass).to include(ERB::Util)
     end
   end
 

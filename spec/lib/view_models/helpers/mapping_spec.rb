@@ -10,45 +10,45 @@ describe ViewModels::Helpers::Mapping do
       context = double :context
       model = SomeModelClazz.new
       
-      ViewModels::SomeModelClazz.should_receive(:new).once.with model, context
+      expect(ViewModels::SomeModelClazz).to receive(:new).once.with model, context
       
       view_model_for model, context
     end
     describe "specific_view_model_mapping" do
       it "should return an empty hash by default" do
-        specific_view_model_mapping.should == {}
+        expect(specific_view_model_mapping).to eq({})
       end
       it "should raise an ArgumentError on model that does not support 2 arguments" do
         class SomeViewModelClass; def initialize; end; end
         specific_view_model_mapping[String] = SomeViewModelClass
-        lambda {
+        expect {
           view_model_for("Some String")
-        }.should raise_error(ArgumentError, /2\sfor\s0|given\s2\,\sexpected\s0/)
+        }.to raise_error(ArgumentError, /2\sfor\s0|given\s2\,\sexpected\s0/)
       end
     end
     describe "no specific mapping" do
       it "should raise on an non-mapped model" do
-        lambda {
+        expect {
           view_model_for(42)
-        }.should raise_error(NameError, "uninitialized constant ViewModels::Fixnum")
+        }.to raise_error(NameError, "uninitialized constant ViewModels::Fixnum")
       end
       it "should return a default view_model instance" do
         class SomeModelClazz; end
         class ViewModels::SomeModelClazz < ViewModels::Base; end
-        view_model_for(SomeModelClazz.new).should be_instance_of ViewModels::SomeModelClazz
+        expect(view_model_for(SomeModelClazz.new)).to be_instance_of ViewModels::SomeModelClazz
       end
     end
     describe "with specific mapping" do
       class SomeModelClazz; end
       class ViewModels::SomeSpecificClazz < ViewModels::Base; end
       before(:each) do
-        self.should_receive(:specific_view_model_mapping).at_most(2).times.and_return SomeModelClazz => ViewModels::SomeSpecificClazz
+        expect(self).to receive(:specific_view_model_mapping).at_most(2).times.and_return SomeModelClazz => ViewModels::SomeSpecificClazz
       end
       it "should return a specifically mapped view_model instance" do
-        view_model_for(SomeModelClazz.new).should be_instance_of ViewModels::SomeSpecificClazz
+        expect(view_model_for(SomeModelClazz.new)).to be_instance_of ViewModels::SomeSpecificClazz
       end
       it "should not call #default_view_model_class_for" do
-        double(self).should_receive(:default_view_model_class_for).never
+        expect(double(self)).to receive(:default_view_model_class_for).never
         view_model_for SomeModelClazz.new
       end
     end
@@ -58,13 +58,13 @@ describe ViewModels::Helpers::Mapping do
     it "should return a class with ViewModels:: prepended" do
       class Gaga; end # The model.
       class ViewModels::Gaga < ViewModels::Base; end
-      default_view_model_class_for(Gaga.new).should == ViewModels::Gaga
+      expect(default_view_model_class_for(Gaga.new)).to eq(ViewModels::Gaga)
     end
     it "should raise a NameError if the Presenter class does not exist" do
       class Brrzt; end # Just the model.
-      lambda {
+      expect {
         default_view_model_class_for(Brrzt.new)
-      }.should raise_error(NameError, "uninitialized constant ViewModels::Brrzt")
+      }.to raise_error(NameError, "uninitialized constant ViewModels::Brrzt")
     end
   end
   

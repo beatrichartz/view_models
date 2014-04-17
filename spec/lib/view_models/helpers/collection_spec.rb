@@ -11,17 +11,17 @@ describe ViewModels::Helpers::Mapping::Collection do
   
   describe "render_partial" do
     it "should call instance eval on the context" do
-      @context.should_receive(:instance_eval).once
+      expect(@context).to receive(:instance_eval).once
       
       @collection_view_model.send :render_partial, :some_name, :some_params
     end
     it "should render the partial in the 'context' context" do
-      @context.should_receive(:render).once
+      expect(@context).to receive(:render).once
       
       @collection_view_model.send :render_partial, :some_name, :some_params
     end
     it "should call render partial on context with the passed through parameters" do
-      @context.should_receive(:render).once.with(:partial => 'view_models/collection/some_name', :locals => { :a => :b })
+      expect(@context).to receive(:render).once.with(:partial => 'view_models/collection/some_name', :locals => { :a => :b })
       
       @collection_view_model.send :render_partial, :some_name, { :a => :b }
     end
@@ -29,12 +29,12 @@ describe ViewModels::Helpers::Mapping::Collection do
   
   describe "collection_view_model_for" do
     it "should return kind of a ViewModels::Collection" do
-      collection_view_model_for([]).should be_kind_of ViewModels::Helpers::Mapping::Collection
+      expect(collection_view_model_for([])).to be_kind_of ViewModels::Helpers::Mapping::Collection
     end
     it "should pass any parameters directly through" do
       collection = double :collection
       context = double :context
-      ViewModels::Helpers::Mapping::Collection.should_receive(:new).with(collection, context).once
+      expect(ViewModels::Helpers::Mapping::Collection).to receive(:new).with(collection, context).once
       collection_view_model_for collection, context
     end
   end
@@ -43,7 +43,7 @@ describe ViewModels::Helpers::Mapping::Collection do
     it "should call render_partial and return the rendered result" do
       @collection_view_model.stub :render_partial => :result
       
-      @collection_view_model.list.should == :result
+      expect(@collection_view_model.list).to eq(:result)
     end
     it "should call render_partial with the right parameters" do
       default_options = {
@@ -52,7 +52,7 @@ describe ViewModels::Helpers::Mapping::Collection do
         :separator => nil
       }
       
-      @collection_view_model.should_receive(:render_partial).once.with :list, default_options
+      expect(@collection_view_model).to receive(:render_partial).once.with :list, default_options
       
       @collection_view_model.list
     end
@@ -63,7 +63,7 @@ describe ViewModels::Helpers::Mapping::Collection do
         :separator => :d
       }
       
-      @collection_view_model.should_receive(:render_partial).once.with :list, specific_options
+      expect(@collection_view_model).to receive(:render_partial).once.with :list, specific_options
       
       @collection_view_model.list specific_options
     end
@@ -73,7 +73,7 @@ describe ViewModels::Helpers::Mapping::Collection do
     it "should call render_partial and return the rendered result" do
       @collection_view_model.stub :render_partial => :result
       
-      @collection_view_model.collection.should == :result
+      expect(@collection_view_model.collection).to eq(:result)
     end
     it "should call render_partial with the right parameters" do
       default_options = {
@@ -81,7 +81,7 @@ describe ViewModels::Helpers::Mapping::Collection do
         :template_name => :collection_item,
         :separator => nil
       }
-      @collection_view_model.should_receive(:render_partial).once.with :collection, default_options
+      expect(@collection_view_model).to receive(:render_partial).once.with :collection, default_options
       
       @collection_view_model.collection
     end
@@ -92,7 +92,7 @@ describe ViewModels::Helpers::Mapping::Collection do
         :separator => :d
       }
       
-      @collection_view_model.should_receive(:render_partial).once.with :collection, specific_options
+      expect(@collection_view_model).to receive(:render_partial).once.with :collection, specific_options
       
       @collection_view_model.collection specific_options
     end
@@ -102,7 +102,7 @@ describe ViewModels::Helpers::Mapping::Collection do
     it "should call render_partial and return the rendered result" do
       @collection_view_model.stub :render_partial => :result
       
-      @collection_view_model.table.should == :result
+      expect(@collection_view_model.table).to eq(:result)
     end
     it "should call render_partial with the right parameters" do
       default_options = {
@@ -111,7 +111,7 @@ describe ViewModels::Helpers::Mapping::Collection do
         :separator => nil
       }
       
-      @collection_view_model.should_receive(:render_partial).once.with :table, default_options
+      expect(@collection_view_model).to receive(:render_partial).once.with :table, default_options
       
       @collection_view_model.table
     end
@@ -122,7 +122,7 @@ describe ViewModels::Helpers::Mapping::Collection do
         :separator => :d
       }
       
-      @collection_view_model.should_receive(:render_partial).once.with :table, specific_options
+      expect(@collection_view_model).to receive(:render_partial).once.with :table, specific_options
       
       @collection_view_model.table(specific_options)
     end
@@ -132,7 +132,7 @@ describe ViewModels::Helpers::Mapping::Collection do
     it "should call render_partial and return the rendered result" do
       @collection_view_model.stub :render_partial => :result
       
-      @collection_view_model.pagination.should == :result
+      expect(@collection_view_model.pagination).to eq(:result)
     end
     it "should call render_partial with the right parameters" do
       default_options = {
@@ -140,7 +140,7 @@ describe ViewModels::Helpers::Mapping::Collection do
         :template_name => :pagination,
         :separator => '|'
       }
-      @collection_view_model.should_receive(:render_partial).once.with :pagination, default_options
+      expect(@collection_view_model).to receive(:render_partial).once.with :pagination, default_options
       
       @collection_view_model.pagination
     end
@@ -150,7 +150,7 @@ describe ViewModels::Helpers::Mapping::Collection do
         :template_name => :b,
         :separator => :c
       }
-      @collection_view_model.should_receive(:render_partial).once.with :pagination, specific_options
+      expect(@collection_view_model).to receive(:render_partial).once.with :pagination, specific_options
       
       @collection_view_model.pagination specific_options
     end
@@ -160,7 +160,7 @@ describe ViewModels::Helpers::Mapping::Collection do
     describe "enumerable" do
       Enumerable.instance_methods.map(&:to_sym).each do |method|
         it "should delegate #{method} to the collection" do
-          @collection.should_receive(method).once
+          expect(@collection).to receive(method).once
           
           @collection_view_model.send method
         end
@@ -169,38 +169,38 @@ describe ViewModels::Helpers::Mapping::Collection do
     describe "array" do
       describe "length" do
         it "should delegate to #length of the collection" do
-          @collection.should_receive(:length).once
+          expect(@collection).to receive(:length).once
           
           @collection_view_model.length
         end
         it "should return the length of the collection" do
-          @collection.should_receive(:length).and_return :this_length
+          expect(@collection).to receive(:length).and_return :this_length
           
-          @collection_view_model.length.should == :this_length
+          expect(@collection_view_model.length).to eq(:this_length)
         end
         it "should alias size" do
-          @collection.should_receive(:size).and_return :this_length
+          expect(@collection).to receive(:size).and_return :this_length
           
-          @collection_view_model.size.should == :this_length
+          expect(@collection_view_model.size).to eq(:this_length)
         end
       end
       describe "empty?" do
         it "should delegate to #empty? of the collection" do
-          @collection.should_receive(:empty?).once
+          expect(@collection).to receive(:empty?).once
           
           @collection_view_model.empty?
         end
         it "should return whatever #empty? of the collection returns" do
-          @collection.should_receive(:empty?).and_return :true_or_false
+          expect(@collection).to receive(:empty?).and_return :true_or_false
           
-          @collection_view_model.empty?.should == :true_or_false
+          expect(@collection_view_model.empty?).to eq(:true_or_false)
         end
       end
       describe "each" do
         it "should delegate to #each of the collection" do
           proc = double :proc
           
-          @collection.should_receive(:each).with(proc).once
+          expect(@collection).to receive(:each).with(proc).once
           
           @collection_view_model.each proc
         end

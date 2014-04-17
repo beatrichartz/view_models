@@ -7,6 +7,7 @@ module SpecHelperExtensions
   # We have the scenario we are in the given instance.
   #
   def in_the(instance, &block)
+    instance.extend RSpec::Matchers
     instance.instance_eval(&block)
   end
   

@@ -17,27 +17,27 @@ describe ViewModels::Extensions::ModelReader do
     it "should call filters in a given pattern" do
       @view_model.class.model_reader :some_model_value, :filter_through => [:a, :b, :a, :a]
     
-      @view_model.some_model_value.should == 'sabaa'
+      expect(@view_model.some_model_value).to eq('sabaa')
     end
     it "should pass through the model value if no filters are installed" do
       @view_model.class.model_reader :some_model_value
     
-      @view_model.some_model_value.should == 's'
+      expect(@view_model.some_model_value).to eq('s')
     end
     it "should call filters in a given pattern" do
       @view_model.class.model_reader :some_model_value, :filter_through => [:a, :b, :a, :a]
     
-      @view_model.some_model_value.should == 'sabaa'
+      expect(@view_model.some_model_value).to eq('sabaa')
     end
     it "should handle a single filter" do
       @view_model.class.model_reader :some_model_value, :filter_through => :a
     
-      lambda { @view_model.some_model_value }.should_not raise_error
+      expect { @view_model.some_model_value }.not_to raise_error
     end
     it "should handle multiple readers" do
       @view_model.class.model_reader :some_model_value, :some_other_model_value, :filter_through => :a
     
-      lambda { @view_model.some_model_value }.should_not raise_error
+      expect { @view_model.some_model_value }.not_to raise_error
     end
   end
   
@@ -51,7 +51,7 @@ describe ViewModels::Extensions::ModelReader do
         @installer = ViewModels::Extensions::ModelReader::FilteredDelegationInstaller.new @model, @options
       end
       it 'should have a correct filter definition' do
-        @installer.reader_definition_for(:some_attribute).should == 'def some_attribute; filter2(filter1(model.some_attribute)); end'
+        expect(@installer.reader_definition_for(:some_attribute)).to eq('def some_attribute; filter2(filter1(model.some_attribute)); end')
       end
     end
     context 'without filters' do
@@ -60,7 +60,7 @@ describe ViewModels::Extensions::ModelReader do
         @installer = ViewModels::Extensions::ModelReader::FilteredDelegationInstaller.new @model, @options
       end
       it 'should have a correct filter definition' do
-        @installer.reader_definition_for(:some_attribute).should == 'def some_attribute; model.some_attribute; end'
+        expect(@installer.reader_definition_for(:some_attribute)).to eq('def some_attribute; model.some_attribute; end')
       end
     end
   end
@@ -72,7 +72,7 @@ describe ViewModels::Extensions::ModelReader do
       end
       describe 'split' do
         it 'should return the right values' do
-          @options.to_a.should == [[:some_attribute_name], []]
+          expect(@options.to_a).to eq([[:some_attribute_name], []])
         end
       end
     end
@@ -82,7 +82,7 @@ describe ViewModels::Extensions::ModelReader do
       end
       describe 'split' do
         it 'should return the right values, with flipped options' do
-          @options.to_a.should == [[:some_attribute_name], [:filter2, :filter1]]
+          expect(@options.to_a).to eq([[:some_attribute_name], [:filter2, :filter1]])
         end
       end
     end
