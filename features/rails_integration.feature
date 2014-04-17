@@ -11,7 +11,7 @@ Feature: integrate with Rails
       | cucumber-rails        | ~> 1.4.0  | false   |                         |
       | rspec-rails           | ~> 2.14.1 |         |                         |
       | capybara              | ~> 2.2.0  |         |                         |
-      | slim-rails            | ~> 2.0.4  |         |                         |
+      | slim-rails            | ~> 2.1.0  |         |                         |
       | rubysl                | ~> 2.0    |         | if RUBY_ENGINE == 'rbx' |
       | rubysl-test-unit      | ~> 2.0    |         | if RUBY_ENGINE == 'rbx' |
       | racc                  | ~> 1.4    |         | if RUBY_ENGINE == 'rbx' |
