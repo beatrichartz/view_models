@@ -226,8 +226,10 @@ module ViewModels
     def dom_id *args
       if args.present?
         context.dom_id *args
-      else
+      elsif defined?(ActionController::RecordIdentifier)
         ActionController::RecordIdentifier.dom_id model
+      else
+        ActionView::RecordIdentifier.dom_id model
       end
     end
     
