@@ -15,6 +15,11 @@ module ViewModels
       super controller.class.view_paths, {}, controller
     end
     
+    # Delegate view_cache_dependencies to controller class
+    def view_cache_dependencies
+      controller.view_cache_dependencies
+    end
+    
     #
     #
     def render_with options
