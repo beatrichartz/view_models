@@ -1,7 +1,8 @@
 rvm:
   - 1.9.3
   - 2.0.0
-  - 2.1.0
+  - 2.1.5
+  - 2.2.0
   - rbx
   - jruby-19mode
   - jruby-20mode
@@ -9,12 +10,12 @@ rvm:
 script: "bundle install && bundle exec rake spec cucumber"
 
 gemfile:
-  - gemfiles/4.0.Gemfile
+  - gemfiles/4.2.Gemfile
+  - gemfiles/4.1.Gemfile
   - gemfiles/3.2.gemfile
   - gemfiles/3.1.Gemfile
-  
+
 matrix:
   allow_failures:
     - rvm: jruby-19mode
     - rvm: jruby-20mode
-    - rvm: 2.1.0

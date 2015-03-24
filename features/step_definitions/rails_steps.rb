@@ -16,7 +16,7 @@ end
 
 When 'I generate a new rails application' do
   steps %{
-    When I run `rails new #{APP_NAME}`
+    When I run `rails new #{APP_NAME} --skip-test-unit`
     And I cd to "#{APP_NAME}"
     And I comment out the gem "turn" from the Gemfile
     And I comment out the gem "coffee-rails" from the Gemfile
@@ -61,7 +61,7 @@ When 'I configure the application to use the following gems' do |table|
       append_to_gemfile "gem '#{hash[:Name]}', '#{hash[:Version]}'#{hash[:Condition]}\n"
     end
   end
-  
+
 end
 
 When /^I set the "([^"]*)" environment variable to "([^"]*)"$/ do |key, value|

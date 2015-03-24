@@ -27,32 +27,32 @@ h2. Basic Usage
 Let's say you have a model User (with a first and a last name and an address in the database):
 
 <pre><code>class User < ActiveRecord::Base
-  
+
   has_many :posts
-  
+
 end
 </code></pre>
 
 Write a corresponding view model user.rb in your view_models folder
 
 <pre><code>class ViewModels::User < ViewModels::Base
-  
+
   # model readers make model methods accessible on the view model object
   #
   model_reader :first_name, :last_name, :street, :street_number, :zip_code, :city
-  
+
   # Write helper methods which benefit from model readers
   #
   def name
     [first_name, last_name].join ' '
   end
-  
+
   # Access the model by using «model»
   #
   def creation_time
     time_ago_in_words model.created_at
   end
-  
+
 end
 </code></pre>
 
@@ -100,7 +100,7 @@ View models are pretty, because they represent your models in your views. They l
 <pre><code>class ViewModels::User < ViewModels::Base
 
   model_reader :first_name, :last_name, :street, :street_number, :zip_code, :city
-  
+
   def name
     [first_name, last_name].join ' '
   end
@@ -108,7 +108,7 @@ View models are pretty, because they represent your models in your views. They l
   def address
     [street, street_number, zip_code, city].join ' '
   end
-  
+
 end
 </code></pre>
 
@@ -176,7 +176,7 @@ Testing View Models is easy. You can use the view models initializer instead of 
 <pre><code>describe "ViewModels::User" do
   let(:user) { build_stubbed(:user) }
   subject { ViewModels::User.new(user, @controller) } # @controller may be nil or the controller
-  
+
   describe "model_readers"
     .. there you go
   end

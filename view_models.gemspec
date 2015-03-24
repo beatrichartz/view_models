@@ -34,10 +34,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'capybara',            '~> 1'
   s.add_development_dependency 'factory_girl_rails',  '~> 1'
   s.add_development_dependency 'factory_girl',        '~> 2'
-  s.add_development_dependency 'slim-rails',          '~> 1.0'
+  s.add_development_dependency 'slim-rails',          '>= 1.0'
   s.add_development_dependency 'rspec',               '~> 2'
   s.add_development_dependency 'rspec-rails',         '~> 2'
-  
+
   if RUBY_ENGINE == 'rbx'
     s.add_development_dependency "rubysl", "~> 2.0"
     s.add_development_dependency "rubysl-test-unit", '~> 2.0'
