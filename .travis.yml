@@ -14,8 +14,3 @@ gemfile:
   - gemfiles/4.1.Gemfile
   - gemfiles/3.2.gemfile
   - gemfiles/3.1.Gemfile
-
-matrix:
-  allow_failures:
-    - rvm: jruby-19mode
-    - rvm: jruby-20mode
